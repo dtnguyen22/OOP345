@@ -6,6 +6,7 @@
 
 namespace sdds {
 	Vehicle* createInstance(std::istream& in);
+	void trim(std::string&);
 }
 
 #endif

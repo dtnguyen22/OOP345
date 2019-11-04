@@ -14,7 +14,6 @@ namespace sdds {
 		std::string condition() const;
 		double topSpeed() const;
 		void display(std::ostream&) const;
-		void trim(std::string&);
 	};
 }
 

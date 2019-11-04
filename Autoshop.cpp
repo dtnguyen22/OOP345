@@ -14,7 +14,15 @@ namespace sdds {
 		os << "| Cars in the autoshop!        |\n";
 		for (auto i = m_vehicles.begin(); i != m_vehicles.end(); i++) {
 			(*i)->display(os);
+			os << '\n';
 		}
 		os << "--------------------------------";
+	}
+
+
+	Autoshop::~Autoshop() {
+		for (auto i = m_vehicles.begin(); i != m_vehicles.end(); i++) {
+			delete[] (*i);
+		}
 	}
 }
