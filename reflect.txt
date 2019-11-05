@@ -1,0 +1,15 @@
+// Name: DucTai Nguyen
+// Seneca Student ID: 147942171
+// Seneca email: dtnguyen22@myseneca.ca
+// Date of completion: Nov 4th, 2019
+// reflect.txt
+
+
+1. we have to deallocate memory of elements in the vector?
+The responsibility of vector is not included deallocate memory, we have to take care of that process.
+2. For error handling in loadData() function, i use a try catch to control messy data. I think beside
+if/else, try catch is the best solution i have ever known so far.
+3.We can not use list/vector of object type Vehicle, since our project implements this hierachy Vehicle->Car->Racecar,
+It is the best practice to use list of pointer to type Vehicle like we always do in previous workshops to manage these
+polymorphic object.
+If we use list of object, Car and Racecar will be seperated into two list.
