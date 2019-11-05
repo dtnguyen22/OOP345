@@ -1,5 +1,8 @@
 #include <iomanip>
 #include <string>
+#include <sstream>
+#include <typeinfo> 
+
 #include "Utilities.h"
 #include "Car.h"
 
@@ -10,32 +13,34 @@ namespace sdds {
 		this->m_speed = 0;
 	}
 
-	Car::Car(std::istream& is) {
-		std::string carstr;
-		std::getline(is, carstr, ','); //maker
-		trim(carstr);
-		this->m_maker = carstr;
-		std::getline(is, carstr, ',');//condition
-		trim(carstr);
-		if (m_condition == "n" || m_condition == "") {
+	Car::Car(std::istream& ss) {
+		std::string token;
+		std::getline(ss, token, ','); //
+		trim(token);
+		this->m_maker = token;
+		std::getline(ss, token, ',');//condition
+		trim(token);
+		if (token == "n" || token == "") {
 			this->m_condition = "new";
 		}
-		else if (m_condition == "u") {
+		else if (token == "u") {
 			this->m_condition = "used";
 		}
-		else if (m_condition == "b") {
+		else if (token == "b") {
 			this->m_condition = "broken";
 		}
 		else {
 			throw "Invalid record";
 		}
-		is >> carstr; //speed
+		std::getline(ss, token, ',');
 		try {
-			this->m_speed = std::stod(carstr);
+			this->m_speed = std::stod(token);
 		}
 		catch (...) {
+			std::getline(ss, token); //clean ss stream
 			throw "Invalid record";
 		}
+
 	}
 
 	std::string Car::condition() const {
@@ -52,7 +57,9 @@ namespace sdds {
 		os << "| ";
 		os << std::setw(10) << std::right << this->m_maker << " | ";
 		os << std::setw(6) << std::left << this->m_condition << " | ";
-		os << std::setw(6) << std::fixed << std::setprecision(2) << this->m_speed << " |";
+		if (typeid(*this) == typeid(Car)) {
+			os << std::setw(6) << std::fixed << std::setprecision(2) << this->m_speed << " |";
+		}
 	}
 
 

@@ -24,6 +24,7 @@ void loadData(const char* filename, sdds::Autoshop& as)
 		//           "Unrecognized record type: [TAG]<endl>"
 		//       - one of the fields in the record contains invalid data. In this case print
 		//           "Invalid record!<endl>"
+
 		try {
 			sdds::Vehicle* aVehicle = sdds::createInstance(file);
 			if (aVehicle)
@@ -32,7 +33,7 @@ void loadData(const char* filename, sdds::Autoshop& as)
 		catch (char type) {
 			std::cout << "Unrecognized record type: [" << type << "]\n";
 		}
-		catch (char* error) {
+		catch (const char* error) {
 			std::cout << error << std::endl;
 		}
 

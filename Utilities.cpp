@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "Utilities.h"
 #include "Vehicle.h"
 #include "Car.h"
@@ -8,17 +9,23 @@ namespace sdds {
 	Vehicle* createInstance(std::istream& in) {
 		Vehicle* v = nullptr;
 		std::string type;
-		std::getline(in, type, ',');
-		trim(type);
-		if (type == "c" || type == "C") {
-			v = new Car(in);
-		}else if (type == "r" || type == "R") {
-			v = new Racecar(in);
+		if (std::getline(in, type, ',')) {
+			std::string carstr;
+			trim(type);
+			if (type == "c" || type == "C") {
+				std::getline(in, carstr, '\n');
+				carstr += ","; //make it same format with racecar
+				std::stringstream in(carstr);
+				v = new Car(in);
+			}
+			else if (type == "r" || type == "R") {
+				v = new Racecar(in);
+			}
+			else {
+				std::getline(in, carstr); // clean in stream
+				throw type[0];
+			}
 		}
-		else {
-			throw type[0];
-		}
-		in.ignore();//ignore either comma/ \n character
 		return v;
 	}
 
