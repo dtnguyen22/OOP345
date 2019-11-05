@@ -1,8 +1,6 @@
 #include <iomanip>
 #include <string>
-#include <sstream>
-#include <typeinfo> 
-
+#include <typeinfo> //typeid
 #include "Utilities.h"
 #include "Car.h"
 
@@ -30,15 +28,15 @@ namespace sdds {
 			this->m_condition = "broken";
 		}
 		else {
-			throw "Invalid record";
+			throw "Invalid record!";
 		}
 		std::getline(ss, token, ',');
 		try {
 			this->m_speed = std::stod(token);
 		}
 		catch (...) {
-			std::getline(ss, token); //clean ss stream
-			throw "Invalid record";
+			std::getline(ss, token); //clean ss 
+			throw "Invalid record!";
 		}
 
 	}

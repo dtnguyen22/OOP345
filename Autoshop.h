@@ -16,19 +16,14 @@ namespace sdds {
 		template <class T>
 		void select(T test, std::list<const Vehicle*>& vehicles) {
 			for (auto i = m_vehicles.begin(); i != m_vehicles.end(); i++) {
-				// i.begin()/i contains the address of the vector, 
-				// we need to dereference i to get the address of the element in the vector
-				bool fastcar = test(*i);
+				//have to defererence to get the element,
+				//in this case we will get the address of a vehicle
+				bool fastcar = test(*i); //call lambda
 				if (fastcar) {
-					vehicles.push_back(*i);
+					vehicles.push_back(*i); //add vehicles to list
 				}
 			}
 		}
-
-		//void operator()(const sdds::Vehicle*) {
-
-		//}
-
 		~Autoshop();
 	};
 }
